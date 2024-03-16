@@ -1,0 +1,47 @@
+{
+  "notes":
+  [
+    {
+      "id":"00",
+      "patientId": 1,
+      "patientName": "TestNone",
+      "note": "Le patient ne présente aucun déclencheur dangereux. Certes, il 'ne se sent pas très bien' mais ne présente aucun signe de vulneérabilité à la maladie. "
+    },
+    {
+      "id":"01",
+      "patientId": 2,
+      "patientName": "TestBorderline",
+      "note": "Le patient se plaint de vertiges et d'anxiété lié au stress quotidien. Le patient est agé de plus de 30 ans."
+    },
+    {
+      "id":"02",
+      "patientId": 2,
+      "patientName": "TestBorderline",
+      "note": "Les vertiges sont toujours aussi présents pour le patient. Mauvaise réaction suite aux médicaments préscrits.Il y a des risques prêsents pour le patient, qui peuvent encore être maîtrisés."
+    },
+    {
+      "id":"03",
+      "patientId":3,
+      "patientName": "TestInDanger" ,
+      "note": "Le patient est en surpoids et déclare être un gros consommateur de cigarette. "
+    },
+    {
+      "id":"04",
+      "patientId":3,
+      "patientName": "TestInDanger" ,
+      "note": "Le patient est en perte de poids, mais reste au dessus de la courbe de surpoids. Il déclare consommer plus de cigarette depuis sa dernière visite. Après un examen approfondi, son taux de Cholestérol est anormalement élevé. Suspicion de mise en danger de la santé du patient.  "
+    },
+    {
+      "id":"05",
+      "patientId":4,
+      "patientName": "TestEarlyOnSet",
+      "note": "La patiente déclare avoir des problèmes respiratoire. Elle est essoufflée après le moindre effort physique."
+    },
+    {
+      "id":"06",
+      "patientId":4,
+      "patientName": "TestEarlyOnSet",
+      "note": "La patiente est revenue pour un examen approfondi. Son essouflement perdure et elle est prise de vertiges. Nous relevons des indices alarmant sur la patiente : Petite taille, en surpoid. Son taux de Cholestérol est élevé. Ses Anticorps sont faibles et son Hémoglobine A1C est supérieure au niveau recommandé. Elle déclare avoir commencé à fumer récemment. Nous estimons une possible apparition précoce de la maladie."
+    }
+          ]
+}
