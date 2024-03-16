@@ -1,0 +1,79 @@
+version: '3.8'
+
+services:
+
+  Project9:
+    build: ../Project9
+    image: Projet9
+    ports:
+      - 9001:9001
+    environment:
+      link.to.gateway: "gateway:9001"
+
+      gateway:
+        build: ../springCloudGateway
+        image: springCloudGateway
+        ports:
+          - 9003:9003
+        environment:
+          spring.cloud.gateway.routes[0].uri: https://patientMService:8888
+          spring.cloud.gateway.routes[0].predicates[0]: Path=/patient/**
+
+          spring.cloud.gateway.routes[1].uri: https://noteMService:9003
+          spring.cloud.gateway.routes[1].predicates[0]: Path=/note/**
+
+          spring.cloud.gateway.routes[2].uri: https://assessmentMService:9002
+          spring.cloud.gateway.routes[2].predicates[0]: Path=/assessment/**
+
+
+      patientMService:
+        build: ../patientMService
+        depends_on:
+          - mongodb
+        image: patientMService
+        ports:
+          - 8888:8888
+        environment:
+          spring.data.mongodb.url: "jdbc:mongodb://localhost:27017/patients-service"
+          spring.data.mongodb.username: username
+          spring.data.mongodb.password: password
+        mongodb:
+          image: mongo
+          volumes:
+            - mongodb:/var/lib/mysql
+          restart: always
+          ports:
+            - 27017:27017
+
+
+      notesMService:
+        build: ../NotesMService
+        depends_on:
+          - mongodb
+        image: notesMService
+        ports:
+          - 9003:9003
+        environment:
+          spring.data.mongodb.host : localhost
+          spring.data.mongodb.port: 27017
+          spring.data.mongodb.database: notesMService
+        mongodb:
+          image: mongo
+          volumes:
+            - mongodb:/var/lib/mysql
+          restart: always
+
+
+          ports:
+            - 27017:27017
+
+      assessmentMService:
+        build: ../AssessmentMService
+        image: assessmentMService
+        ports:
+          -9002:9002
+        environment:
+          link.to.gateway: "gateway:9002"
+
+      volumes:
+        mongodb:

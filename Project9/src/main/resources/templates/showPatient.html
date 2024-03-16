@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Medilabo Solutions</title>
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+</head>
+<body>
+<html class="container">
+    <div class="row">
+        <div class="col-6">
+
+    </div>
+        <div class="col-6 text-right">
+            <a href="/patient">Home</a>&nbsp; |&nbsp;<a href="/logout">Logout</a>
+        </div>
+    </div>
+
+    <h2 th:text="${patient.firstName} + ' ' +${patient.lastName}"></h2>
+
+    <p th:if="${assessment == T(com.example.Projet9.domain.Assessment).None}">Diabete Evaluation : <span
+        class ="badge bg-success text-light">No Risk</span></p>
+
+    <p th:if="${assessment == T(com.example.Projet9.domain.Assessment).Borderline}">Diabete Evaluation : <span
+        class ="badge bg-secondary text-light"> Low Risk</span></p>
+
+    <p th:if="${assessment == T(com.example.Projet9.domain.Assessment).InDanger">Diabete Evalutation<span
+        class ="badge bg-warning text-light">Danger</span></p>
+
+    <p th:if="${assessment == T(com.example.Projet9.domain.Assessment).EarlyOnSet">Diabete Evaluation<span
+        class ="badge bg-danger text-light">Early OnSet</span></p>
+
+
+    <body class="row">
+        <div class="col-3">
+
+            <table class="table table-bordered">
+
+                <tr>
+                    <th style="width: 10%"> Frist Name</th>
+                    <td th:text="${patient.firstName}"></td>
+                </tr>
+
+                <tr>
+                    <th style="width: 10%">Last Name</th>
+                    <td th:text="${patient.lastName}"></td>
+                </tr>
+
+                <tr>
+                    <th style="width: 10%">Birthday</th>
+                    <td th:text="${patient.birthday}"></td>
+                </tr>
+
+                <tr>
+                    <th style="width: 10%"> Gender</th>
+                    <td th:text="${patient.gender}"></td>
+                </tr>
+
+                <tr>
+                    <th style="width: 10%"> Address</th>
+                    <td th:text="${patient.address}"></td>
+                </tr>
+
+                <tr>
+                    <th style="width: 10%"> Phone</th>
+                    <td th:text="${patient.phone}"></td>
+                </tr>
+
+                <tr>
+
+                    <th>Action</th>
+                    <td style="width: 20%" class="text-center">
+                        <a th:href="@{/patient/update/{id}(id=${patient.id})}">Edit</a>&nbsp; |&nbsp;
+                        <a th:href="@{/patient/delete/{id}(id=${patient.id})}">Delete</a>
+                    </td>
+                </tr>
+            </table>
+    </div>
+
+        <div class="col-1"></div>
+        <div class="col-8">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Note</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+
+                <tr th:each="note : ${note}">
+                    <td th:text="${note.note}"></td>
+                    <td style="width: 25%" class="text-center">
+                        <a th:href="@{/patient/display(noteId=${note.id}, patientId=${note.patient_id})}">Edit</a>&nbsp; |&nbsp;
+                        <a th:href="@{/note/delete/{id}(id=${note.id}, patientId=${note.patient_id})}">Delete</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div>
+            <form action="#" th:action="@{note/save}" th:object="${noteToSave}" method="post"
+                  class="form-horizontal" style="width:100%">
+
+                <div class="form-group">
+                    <label for="note" th:if="${noteToSave.id == null}" class="form-label">New note</label>
+                    <label for="note" th:if="${noteToSave.id !== null}" class="form-label">Update note</label>
+                    <textarea class="form-control" th:field="*{note}" id="note" rows="3" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <input type="hidden" th:value="${patient.lastName}" name="patient"/>
+                        <input type="hidden" th:value="${patient.id}" name="patient_id"/>
+                        <input type="hidden" th:field="*{id}">
+                        <a class="btn btn-danger btn-sm" th:if="$noteToSave.id != null}"
+                           th:href=@{/patient/(patientId=${patient.id})}>Cancel</a>
+                        <input class="btn btn-primary btn-sm" type="submit" th:if="$noteToSave.id !== null}" value="Update">
+                        <input class="btn btn-primary btn-sm" type="submit" th:if="$noteToSave.id == null}" value="Add New">
+                </div>
+                </div>
+            </form>
+        </div>
+
+    </body>
+</html>

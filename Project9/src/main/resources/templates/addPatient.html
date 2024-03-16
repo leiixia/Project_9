@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>MediLabo Solutions</title>
+    <link rel="stylesheet" href="../../resources/static/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h2>Add New Patient</h2>
+        </div>
+
+        <div class="row">
+            <form action="#" th:action="@{patient/validate}" th:object="${patient}" method="post" class="form-horizontal">
+
+                <div class="form-group">
+                    <label for="firstName" class="col-sm-3 control-label"> First Name</label>
+                    <div class="col-sm-9">
+                        <input type="text" th:field="*{firstName}" id="firstName" placeholder="First Name" class="col-5">
+                        <p class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
+                    </div>
+                </div>
+
+                 <div class="form-group">
+                     <label for="lastName" class="col-sm-3 control-label"> Last Name</label>
+                     <div class="col-sm-9">
+                         <input type="text" th:field="*{lastName}" id="lastName" placeholder="Last Name" class="col-5">
+                         <p class="text-danger" th:if="${#field.hasErrors('lastName')}" th:errors="*{lastName}"></p>
+                     </div>
+                 </div>
+
+
+                     <div class="form-group">
+                         <label for="birthday" class="col-sm-3 control-label"> Birthday</label>
+                         <div class="col-sm-9">
+                             <input type="date" th:field="*{birthday}" th:format="'yyyy-MM-dd'" id="birthday"
+                                    placeholder="DD/MM/YYYY" class="col-5" min="1900-01-01" max="2500-01-01">
+                             <p class="text-danger" th:if="${#field.hasErrors('birthday')}" th:errors="*{birthday}"></p>
+                         </div>
+                     </div>
+
+                         <div class="form-group">
+                             <label for="gender" class="col-sm-3 control-label"> Gender</label>
+                             <div class="col-sm-9">
+                                 <select type="text" th:field="*{gender.gender}" id="gender"  class="col-5">
+                                     <option value="">Select a gender</option>
+                                     <option value="Female">Female</option>
+                                     <option value="Male">Male</option>
+                                     <option value="Other">Other</option>
+                                 </select>
+                                 <p class="text-danger" th:if="${#fields.hasErrors('gender.gender')}"
+                                    th:errors="*{gender.gender}"></p>
+                             </div>
+                         </div>
+
+                             <div class="form-group">
+                                 <label for="address" class="col-sm-3 control-label"> Address</label>
+                                 <div class="col-sm-9">
+                                     <input type="text" th:field="*{address}" id="address" placeholder="Address" class="col-5">
+                                     <p class="text-danger" th:if="${#field.hasErrors('address')}" th:errors="*{address}"></p>
+                                 </div>
+                             </div>
+
+                                 <div class="form-group">
+                                     <label for="phone" class="col-sm-3 control-label"> Phone </label>
+                                     <div class="col-sm-9">
+                                         <input type="text" th:field="*{phone}" id="phone" placeholder="Phone" class="col-5">
+                                         <p class="text-danger" th:if="${#field.hasErrors('phone')}" th:errors="*{phone}"></p>
+                                     </div>
+                                 </div>
+
+
+
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <a class="btn btn-primary btn-sm" type="submit" value="Add patient"> Validate</a>
+                                        <a class="btn btn-danger btn-sm" href="/patient"> Cancel </a>
+                                    </div>
+                                </div>
+
+
+
+
+            </form>
+        </div>
+
+    </div>
+
+</body>
+</html>
